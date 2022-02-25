@@ -1,0 +1,58 @@
+# This experiment tests the performance of an I-NTMCP Pursuer using different
+# numbers of simulations.
+# Comparisons are made with random and SP policies against I-NTMCP runner
+# (using 2048 simulations), random and SP policies.
+env_name: pe
+run_kwargs:
+    seed: 0
+    gamma: 0.95
+    num_episodes: 100
+    time_limit: 86400     # 24 hours
+    step_limit: 40
+    show_tree: None
+    show_belief: None
+    show_pi: None
+models:
+    8by8:
+        grid_name: '8by8'
+policies:
+    0:
+        - class: "NST"
+          gamma: 0.95
+          nesting_level: [0, 1]
+          num_sims: [2048]
+          rollout_policies:
+            - 0:
+                    - PESPPolicy
+                    - r_hi: 90
+                      r_lo: -138
+              1:
+                    - None
+          uct_c: 230.0
+          epsilon: 0.1
+        - class: "random"
+          gamma: 0.95
+        - class: PESPPolicy
+          gamma: 0.95
+          r_hi: 90
+          r_lo: -138
+    1:
+        - class: "NST"
+          gamma: 0.95
+          nesting_level: [0, 1, 2, 3]
+          num_sims: [16, 128, 512, 1024, 2048, 4096]
+          rollout_policies:
+            - 0:
+                    - PESPPolicy
+                    - r_hi: 90
+                      r_lo: -138
+              1:
+                    - None
+          uct_c: 230.0
+          epsilon: 0.1
+        - class: "random"
+          gamma: 0.95
+        - class: PESPPolicy
+          gamma: 0.95
+          r_hi: 90
+          r_lo: -138

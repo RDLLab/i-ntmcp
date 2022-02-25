@@ -5,7 +5,7 @@ from typing import Tuple, List
 import numpy as np
 import pandas as pd
 
-from intmcp.config import BASE_RESULTS_DIR
+from intmcp.config import BASE_RESULTS_DIR, IROS_DIR
 
 
 AGENT_ID_KEY = "agent_id"
@@ -49,14 +49,18 @@ COMPILED_RESULTS_FILENAME = "compiled_results.csv"
 
 
 def get_results_file_and_dir(problem_name: str,
-                             exp_result_dir: str) -> Tuple[str, str]:
+                             exp_result_dir: str,
+                             iros: bool = False) -> Tuple[str, str]:
     """Get the results file and dir path
 
     This will first look for "compiled_results.csv" file in the exp_result_dir,
     if it can't find it in this directory it will look in sub directories
     of the exp_result_dir whose name startswith problem_name.
     """
-    exp_result_dir = os.path.join(BASE_RESULTS_DIR, exp_result_dir)
+    if iros:
+        exp_result_dir = os.path.join(IROS_DIR, exp_result_dir)
+    else:
+        exp_result_dir = os.path.join(BASE_RESULTS_DIR, exp_result_dir)
 
     results_dir = exp_result_dir
     results_file = os.path.join(results_dir, COMPILED_RESULTS_FILENAME)
@@ -161,7 +165,8 @@ def import_results_df(results_file: str) -> pd.DataFrame:
 
 
 def load_results(problem_name: str,
-                 exp_results_dir: str) -> Tuple[pd.DataFrame, str]:
+                 exp_results_dir: str,
+                 iros: bool) -> Tuple[pd.DataFrame, str]:
     """Load results for given problem and exp_results dir.
 
     This is a convinience function that calls the get_results_file_and_dir
@@ -173,7 +178,7 @@ def load_results(problem_name: str,
     directory (which is useful for saving result plots)
     """
     results_file, results_dir = get_results_file_and_dir(
-        problem_name, exp_results_dir
+        problem_name, exp_results_dir, iros
     )
     return import_results_df(results_file), results_dir
 

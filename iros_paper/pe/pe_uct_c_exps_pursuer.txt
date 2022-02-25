@@ -1,0 +1,155 @@
+####################
+PE UCT C Experiments
+####################
+
+-----------------------
+PE UCT C experiment
+-----------------------
+
+This experiment is to determine a good value of c for the UCT action selection.
+
+Params:
+- num episodes = 50
+- step limit = 40
+- gamma = 0.95
+
+
+Trial #0 NST l=0 vs random
+``````````````````````````
+
+Use R_hi from convergence experiments = 92
+
+
+Trial #1 random vs random
+``````````````````````````
+- Agents:
+  - 0:
+    - Random policy
+  - 1:
+    - Random policy
+
+Use result from Runner UCT C exp
+
+Result
+``````
+
+R_lo = lowest return achieved by random rollouts
+R_hi = highest return achieved by NST l=0 with uct_c = 0
+
+c = R_hi - R_lo = 99 - (-138) = 236
+
+Round down to 230 to be consistent with runner.
+
+Validation
+``````````
+
+Comparing NST l=0 using uct_c=230 vs uct_c=70 (my handpicked value) vs uct_c=0,
+over 10 episodes and using num_sims=2048
+
+UCT C   | return +/- std    | Win/Loss/Draw  | Max   |
+--------|--------------------------------------------
+0       | 85.90 +/- 8.20    | 10/0/0         | 95    |
+70      | 94.10 +/- 1.58    | 10/0/0         | 94    |
+230     | 94.20 +/- 1.72    | 10/0/0         | 97    |
+------------------------------------------------------
+
+
+---------------------------------------------
+Chaser NST l=0 (POMDP) Convergence experiment
+---------------------------------------------
+
+This experiment was to determine how many samples required by an NST l=0 agent
+to converge in terms of policy when using c=0
+
+Params:
+- num episodes = 50
+- step limit = 40
+- gamma = 0.95
+- uct_c = 0
+- epsilon = 0.25
+- seed = 0
+- grid_name = '8by8v2'
+- Agents:
+  - 0:
+    - Random
+  - 1:
+    - NST l=0
+    - Num sims = K
+    - rollout_policies = None
+
+Summary
+```````
+
+Num sims    | return +/- std     | Win/Loss/Draw  | Max   |
+------------|----------------------------------------------
+512         | 64.02 +/- 46.29    | 42/0/8         | 98.0  |
+1024        | 75.54 +/- 39.40    | 45/0/5         | 99.0  |
+-----------------------------------------------------------
+
+
+Trial #0 512 sims
+`````````````````
++---------------------------------+-----------+----------+
+| AgentID                         |         0 |        1 |
++---------------------------------+-----------+----------+
+| policy_entropy_mean             |    2.0000 |   0.0000 |
+| policy_entropy_std              |    0.0000 |   0.0000 |
+| search_time_mean                |    0.0000 |   0.8915 |
+| search_time_std                 |    0.0000 |   0.3777 |
+| update_time_mean                |    0.0000 |   0.0161 |
+| update_time_std                 |    0.0000 |   0.0138 |
+| reinvigoration_time_mean        |    0.0000 |   0.0008 |
+| reinvigoration_time_std         |    0.0000 |   0.0026 |
+| num_episodes                    |        50 |       50 |
+| episode_returns_mean            | -103.9800 |  64.0200 |
+| episode_returns_std             |   29.3493 |  46.2889 |
+| episode_returns_max             |  -40.0000 |  98.0000 |
+| episode_returns_min             | -139.0000 | -40.0000 |
+| episode_discounted_returns_mean |  -49.8864 |  28.3063 |
+| episode_discounted_returns_std  |   21.0731 |  30.1086 |
+| episode_discounted_returns_max  |  -16.5583 |  83.8850 |
+| episode_discounted_returns_min  |  -87.5900 | -16.5583 |
+| episode_steps_mean              |   20.8200 |  20.8200 |
+| episode_steps_std               |   12.3186 |  12.3186 |
+| episode_times_mean              |   22.8276 |  22.8276 |
+| episode_times_std               |   20.3551 |  20.3551 |
+| episode_dones                   |    0.8400 |   0.8400 |
+| num_outcome_LOSS                |        42 |        0 |
+| num_outcome_DRAW                |         8 |        8 |
+| num_outcome_WIN                 |         0 |       42 |
+| num_outcome_NA                  |         0 |        0 |
++---------------------------------+-----------+----------+
+
+
+Trial #1 1024 sims
+``````````````````
++---------------------------------+-----------+----------+
+| AgentID                         |         0 |        1 |
++---------------------------------+-----------+----------+
+| policy_entropy_mean             |    2.0000 |   0.0000 |
+| policy_entropy_std              |    0.0000 |   0.0000 |
+| search_time_mean                |    0.0000 |   1.5753 |
+| search_time_std                 |    0.0000 |   0.6795 |
+| update_time_mean                |    0.0000 |   0.0387 |
+| update_time_std                 |    0.0000 |   0.0888 |
+| reinvigoration_time_mean        |    0.0000 |   0.0026 |
+| reinvigoration_time_std         |    0.0000 |   0.0071 |
+| num_episodes                    |        50 |       50 |
+| episode_returns_mean            | -104.4600 |  75.5400 |
+| episode_returns_std             |   23.0419 |  39.4021 |
+| episode_returns_max             |  -40.0000 |  99.0000 |
+| episode_returns_min             | -138.0000 | -40.0000 |
+| episode_discounted_returns_mean |  -59.7384 |  42.7180 |
+| episode_discounted_returns_std  |   20.8508 |  30.0413 |
+| episode_discounted_returns_max  |  -16.5583 |  89.3000 |
+| episode_discounted_returns_min  |  -91.2000 | -16.5583 |
+| episode_steps_mean              |   15.3600 |  15.3600 |
+| episode_steps_std               |   11.6923 |  11.6923 |
+| episode_times_mean              |   31.1529 |  31.1529 |
+| episode_times_std               |   36.0998 |  36.0998 |
+| episode_dones                   |    0.9000 |   0.9000 |
+| num_outcome_LOSS                |        45 |        0 |
+| num_outcome_DRAW                |         5 |        5 |
+| num_outcome_WIN                 |         0 |       45 |
+| num_outcome_NA                  |         0 |        0 |
++---------------------------------+-----------+----------+
