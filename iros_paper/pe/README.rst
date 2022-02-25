@@ -18,7 +18,6 @@ Running the experiments
 
 The experiments can be run using the `run_exp.py` script located in the `i-ntmcp/run_scripts` directory.
 
-
 .. code-block:: bash
 
    # you can view run options using the --help flag

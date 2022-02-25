@@ -23,8 +23,8 @@ installing I-NTMCP in a seperate virtual environment such as those provided by `
 1. Download or clone the repo.
 2. Install I-NTMCP using PIP by navigating to the ``i-ntmcp`` root directory (the one containing the ``setup.py`` file), and running:
 
-
 .. code-block:: bash
+
     pip install -e .
 
     # use the following to install all dependencies (including for search tree
