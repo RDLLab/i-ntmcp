@@ -230,7 +230,7 @@ def get_agent_policies(agent_df: pd.DataFrame
         elif 'greedy' in str(pi).lower():
             pi_label = 'Greedy'
         elif NESTED_REASONING_PI in str(pi).lower():
-            pi_label = 'NR'
+            pi_label = 'FNR'
         else:
             pi_label = str(pi)
 

@@ -1,4 +1,5 @@
-# Experiment process for finding UCT C hyper parameter value for I-NTMCP
+Experiment process for finding UCT C hyper parameter value for I-NTMCP
+######################################################################
 
 1. Determine r_hi:
    - Run NST l=0 with c=0 for different number of simulations against a random opponent

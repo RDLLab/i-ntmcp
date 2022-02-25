@@ -130,12 +130,12 @@ class EpisodeTracker(Tracker):
              policies: Sequence[policy.BasePolicy],
              episode_end: bool) -> None:
         next_state, _, rewards, done = timestep
-        self._current_episode_steps += 1
         self._current_episode_returns += rewards
         self._current_episode_discounted_returns += (
             self._discounts**self._current_episode_steps * rewards
         )
         self._current_episode_done = done
+        self._current_episode_steps += 1
 
         if episode_end:
             self._num_episodes += 1

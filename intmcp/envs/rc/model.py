@@ -98,7 +98,7 @@ class RCModel(M.POSGModel):
                         self.grid.get_neighbouring_locs(chaser_loc, True)
                     )
 
-                    runner_loc = random.choice(valid_locs)
+                    runner_loc = random.choice(list(valid_locs))
 
                 chaser_obs = obs
                 runner_obs = self._get_agent_obs(

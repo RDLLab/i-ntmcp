@@ -129,6 +129,7 @@ def plot_pairwise_pis_y_by_x(plot_df: pd.DataFrame,
     x_labels.sort()
 
     fontsize = kwargs.get("fontsize", "x-small")
+    lines, labels = [], []
 
     for pi_j_idx, (pi_j, pi_j_nl) in enumerate(agent_j_pis):
         j_df = agent_j_df[agent_j_df[parts.POLICY_KEY] == pi_j]
@@ -156,31 +157,55 @@ def plot_pairwise_pis_y_by_x(plot_df: pd.DataFrame,
                 if y_err_key:
                     y_err = np.full(len(x_labels), y_err)
 
-            ax.plot(x, y, label=pi_i_label)
+            line, = ax.plot(x, y, label=pi_i_label)
             if y_err_key:
                 ax.fill_between(x, y-y_err, y+y_err, alpha=0.1)
 
             pi_j_label = pi_j_labels[pi_j_idx]
             pi_j_label = pi_j_label.replace("\n", " ")
 
+            if pi_j_idx == 0:
+                lines.append(line)
+                labels.append(pi_i_label)
+
         if kwargs.get("show_title", True):
-            ax.set_title(
-                f"Agent={agent_j_id} pi={pi_j_label}", fontsize=fontsize
+            if "axes_titles" in kwargs:
+                axes_title = kwargs["axes_titles"][pi_j_idx]
+            else:
+                axes_title = f"Agent={agent_j_id} pi={pi_j_label}"
+
+            axes_title_kwargs = kwargs.get(
+                "axes_title_kwargs", {"fontsize": fontsize}
             )
-        if pi_j_idx == 0:
+            ax.set_title(axes_title, **axes_title_kwargs)
+
+        if pi_j_idx == 0 or not kwargs.get("sharey", True):
             ax.set_ylabel(kwargs.get('ylabel', y_key), fontsize=fontsize)
         ax.set_xlabel(kwargs.get("xlabel", x_key), fontsize=fontsize)
         if kwargs.get("logx", True):
             ax.semilogx()
+        if kwargs.get("logy", True):
+            ax.semilogy()
         if kwargs.get("ylim", None):
             ax.set_ylim(*kwargs.get("ylim"))
 
     if kwargs.get("show_legend", True):
-        axs[len(agent_j_pis)-1].legend(
-            **kwargs.get("legend_kwargs", {})
+        legend_kwargs = kwargs.get(
+            "legend_kwargs",
+            {
+                "bbox_to_anchor": [0.5, 0.0],
+                "loc": 'center',
+                "ncol": len(labels)
+            }
         )
+        legend_kwargs["labels"] = legend_kwargs.get("labels", labels)
+        fig.legend(lines, **legend_kwargs)
 
-    fig.tight_layout()
+        fig.tight_layout()
+        plt.subplots_adjust(bottom=0.2)
+    else:
+        fig.tight_layout()
+
     fig.savefig(
         os.path.join(
             results_dir,
@@ -188,5 +213,6 @@ def plot_pairwise_pis_y_by_x(plot_df: pd.DataFrame,
                 f"{extra_label}y={y_key}_pairwise_"
                 f"{agent_i_id}_vs_{agent_j_id}.png"
             )
-        )
+        ),
+        bbox_inches="tight"
     )

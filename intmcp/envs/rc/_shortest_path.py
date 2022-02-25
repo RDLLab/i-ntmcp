@@ -30,7 +30,7 @@ def a_star_search(start_loc: grid_lib.Loc,
                   model: rc_model_lib.RCModel):
     """Run A* Search """
     # pylint: disable=[protected-access]
-    grid = model._grid
+    grid = model.grid
 
     action_space = []
     for a in model.get_agent_action_space(agent_id):
@@ -52,7 +52,7 @@ def a_star_search(start_loc: grid_lib.Loc,
             return extract_policy(start_loc, target_loc, came_from)
 
         for action in action_space:
-            next_loc = model._get_agent_next_loc(current_loc, action)
+            next_loc = model.get_agent_next_loc(current_loc, action)
 
             new_g_score = g_score[current_loc] + 1
             if new_g_score < g_score[next_loc]:

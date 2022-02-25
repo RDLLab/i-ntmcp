@@ -20,17 +20,18 @@ The experiments can be run using the ``run_exp.py`` script located in the ``i-nt
 
 .. code-block:: bash
 
+   # These commmands are run from the i-ntmcp directory
    # you can view run options using the --help flag
    python run_scripts/run_exp.py --help
 
-   # to run num sims experiment from i-ntmcp directory
+   # to run num sims experiment
    python run_scripts/run_exp.py iros_paper/pe/pe_exp_num_sims.yaml
 
-   # to run win rate experiment from i-ntmcp directory
+   # to run win rate experiment
    python run_scripts/run_exp.py iros_paper/pe/pe_exp_win_rate.yaml
 
 
-The results of each experiment run will be saved to a directory in the ``i-ntmcp/results/`` directory.
+The results of each experiment run will be saved to a directory (with the same name as the .yaml file) in the ``i-ntmcp/results/`` directory.
 
 
 Problem Size
