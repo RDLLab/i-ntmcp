@@ -17,11 +17,11 @@ Installation
 I-NTMCP is implemented using Python 3.9.
 
 As with any python seperate python library, project, etc, we recommend
-installing I-NTMCP in a seperate virtual environment such as those provided by [Conda](https://docs.conda.io/en/latest/).
+installing I-NTMCP in a seperate virtual environment such as those provided by `Conda <https://docs.conda.io/>`_.
 
 
 1. Download or clone the repo.
-2. Install I-NTMCP using PIP by navigating to the `i-ntmcp` root directory (the one containing the `setup.py` file), and running:
+2. Install I-NTMCP using PIP by navigating to the ``i-ntmcp`` root directory (the one containing the ``setup.py`` file), and running:
 
 
 .. code-block:: bash
@@ -35,10 +35,10 @@ installing I-NTMCP in a seperate virtual environment such as those provided by [
 Running I-NTMCP
 ~~~~~~~~~~~~~~~
 
-I-NTMCP can be run using the run script provided: `run_scripts/run.py`. This script takes the following compolsory as arguments:
+I-NTMCP can be run using the run script provided: ``run_scripts/run.py``. This script takes the following compolsory as arguments:
 
 
-1. the environment name - `rc` for the *Runner-Chaser* domain, and `pe` for the *Pursuit-Evasion* domain.
+1. the environment name - ``rc`` for the *Runner-Chaser* domain, and ``pe`` for the *Pursuit-Evasion* domain.
 2. the name of the policy/algorithm to use for agent 0
 3. the name of the policy/algorithm to use for agent 1
 
@@ -46,21 +46,21 @@ I-NTMCP can be run using the run script provided: `run_scripts/run.py`. This scr
 The available policies are:
 
 
-1. `NST`, `NestedSearchTree` - this is the I-NTMCP algorithm
-2. `random` - a uniform random policy
-3. `PESPPolicy` - the shortest path policy for the *Pursuit-Evasion* problem
-4. `RCNestedReasoningPolicy` - the finite nested reasoning policy for the *Runner-Chaser* problem
+1. ``NST``, ``NestedSearchTree`` - this is the I-NTMCP algorithm
+2. ``random`` - a uniform random policy
+3. ``PESPPolicy`` - the shortest path policy for the *Pursuit-Evasion* problem
+4. ``RCNestedReasoningPolicy`` - the finite nested reasoning policy for the *Runner-Chaser* problem
 
 
-The script also takes additional arguments depending on the problem and policy/algorithm being run. These additional arguments can be viewed using the `--help` flag.
+The script also takes additional arguments depending on the problem and policy/algorithm being run. These additional arguments can be viewed using the ``--help`` flag.
 
-For example, the different size grids for the *Runner-Chaser* problem can be run using the `--grid_name` flag with and either `cap3`, `cap4`, or `cap7`.
+For example, the different size grids for the *Runner-Chaser* problem can be run using the ``--grid_name`` flag with and either ``cap3``, ``cap4``, or ``cap7``.
 
 
 IROS paper results and experiments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-IROS paper results and other files can be found in the `iros_paper` directory. For more details for each environment, including instructions for re-running the experiments, see the README files in the `iros_paper/rc` and `iros_paper/pe` directories.
+IROS paper results and other files can be found in the ``iros_paper`` directory. For more details for each environment, including instructions for re-running the experiments, see the README files in the ``iros_paper/rc`` and ``iros_paper/pe`` directories.
 
 
 Authors
