@@ -38,12 +38,20 @@ Problem Size
 
 For the 8x8 grid
 
-Number of states = (# open locs * # directions)^(num agents) * (max # possible different runner goal locs)
+States
+``````
+(# open locs * # directions) ^ (num agents) * (max # possible different runner goal locs)
+
 *|S|* = 3*(43*4)**2 = 88752 = ~8.8*10^4
 
-Number of observations = #WallObs * seen/not * heard/not
+Observations
+````````````
+#WallObs * seen/not * heard/not
+
 *|O|* chaser = *|O|* runner = 2^6 = 64
 
-*|A|* runner = *|A|* chaser = 4
-
 Observation branching factor = 4
+
+Actions
+```````
+*|A|* runner = *|A|* chaser = 4
