@@ -38,7 +38,7 @@ PROPORTION_KEYS = [
 
 POLICY_NAME_MAP = {
     "RandomPolicy": "Random",
-    "NestedSearchTree": "INTMCP",
+    "NestedSearchTree": "I-NTMCP",
 }
 
 RANDOM_PI = "RandomPolicy"
@@ -237,7 +237,7 @@ def get_agent_policies(agent_df: pd.DataFrame
         if len(nls) > 1 or pi_label in ("NST", "NR"):
             for nl in nls:
                 agent_pis.append((pi, nl))
-                labels.append(f"{pi_label}\nl={nl}")
+                labels.append(f"{pi_label} l={nl}")
         else:
             agent_pis.append((pi, nls[0]))
             labels.append(pi_label)
