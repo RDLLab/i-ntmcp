@@ -1,0 +1,31 @@
+# Runs I-NTMCP Runner, using different number of simulations and nesting
+# levels, against chasers using RC Finite-Nested Reasoning and random policies
+env_name: rc
+run_kwargs:
+    seed: 0
+    gamma: 0.95
+    num_episodes: 250
+    time_limit: 43200     # 12 hours
+    step_limit: 20
+    show_tree: None
+    show_belief: None
+    show_pi: None
+models:
+    cap7: {}
+policies:
+    0:
+        - class: "NST"
+          gamma: 0.95
+          nesting_level: [3, 2, 1, 0]
+          num_sims: [4096, 2048, 1024, 512, 128, 16, 1]
+          rollout_policies: [None]
+          uct_c: 110.0
+          epsilon: 0.1
+        - class: "random"
+          gamma: 0.95
+    1:
+        - class: "random"
+          gamma: 0.95
+        - class: "RCNestedReasoningPolicy"
+          gamma: 0.95
+          nesting_level: [0, 1, 2, 3]
