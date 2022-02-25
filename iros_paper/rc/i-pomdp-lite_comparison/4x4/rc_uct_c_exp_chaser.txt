@@ -1,0 +1,110 @@
+####################
+RC UCT C Experiments
+####################
+
+-----------------------
+Chaser UCT C experiment
+-----------------------
+
+This experiment is to determine a good value of c for the UCT action selection.
+
+Params:
+- num episodes = 50
+- step limit = 20
+- gamma = 0.95
+
+
+Trial #0 NST l=0 Chaser vs random Runner
+````````````````````````````````````````
+- Agents:
+  - 0:
+    - Random policy
+  - 1:
+    - NST l=0
+    - Num sims = 1024
+    - Rollout = Random
+    - uct_c = 0
+    - epsilon = 0.1
+
+
++---------------------------------+-----------+-----------+
+| AgentID                         |         0 |         1 |
++---------------------------------+-----------+-----------+
+| policy_entropy_mean             |    2.0000 |    0.0000 |
+| policy_entropy_std              |    0.0000 |    0.0000 |
+| search_time_mean                |    0.0000 |    0.4934 |
+| search_time_std                 |    0.0000 |    0.1227 |
+| update_time_mean                |    0.0000 |    0.0200 |
+| update_time_std                 |    0.0000 |    0.0266 |
+| reinvigoration_time_mean        |    0.0000 |    0.0000 |
+| reinvigoration_time_std         |    0.0000 |    0.0000 |
+| num_episodes                    |        50 |        50 |
+| episode_returns_mean            |  -66.1200 |   53.8800 |
+| episode_returns_std             |   79.7510 |   80.3307 |
+| episode_returns_max             |   98.0000 |   99.0000 |
+| episode_returns_min             | -111.0000 | -113.0000 |
+| episode_discounted_returns_mean |  -47.6352 |   37.6362 |
+| episode_discounted_returns_std  |   56.0304 |   56.5276 |
+| episode_discounted_returns_max  |   83.8850 |   89.3000 |
+| episode_discounted_returns_min  |  -91.2000 |  -87.5900 |
+| episode_steps_mean              |    7.1200 |    7.1200 |
+| episode_steps_std               |    2.5740 |    2.5740 |
+| episode_times_mean              |    3.6022 |    3.6022 |
+| episode_times_std               |    1.4180 |    1.4180 |
+| episode_dones                   |    1.0000 |    1.0000 |
+| num_outcome_LOSS                |        40 |        10 |
+| num_outcome_DRAW                |         0 |         0 |
+| num_outcome_WIN                 |        10 |        40 |
+| num_outcome_NA                  |         0 |         0 |
++---------------------------------+-----------+-----------+
+
+
+Trial #1 random vs random
+``````````````````````````
+- Agents:
+  - 0:
+    - Random policy
+  - 1:
+    - Random policy
+
++---------------------------------+-----------+-----------+
+| AgentID                         |         0 |         1 |
++---------------------------------+-----------+-----------+
+| policy_entropy_mean             |    2.0000 |    2.0000 |
+| policy_entropy_std              |    0.0000 |    0.0000 |
+| search_time_mean                |    0.0000 |    0.0000 |
+| search_time_std                 |    0.0000 |    0.0000 |
+| update_time_mean                |    0.0000 |    0.0000 |
+| update_time_std                 |    0.0000 |    0.0000 |
+| reinvigoration_time_mean        |    0.0000 |    0.0000 |
+| reinvigoration_time_std         |    0.0000 |    0.0000 |
+| num_episodes                    |        50 |        50 |
+| episode_returns_mean            |  -15.6600 |  -11.6600 |
+| episode_returns_std             |   75.9925 |   76.8645 |
+| episode_returns_max             |   98.0000 |   98.0000 |
+| episode_returns_min             | -118.0000 | -119.0000 |
+| episode_discounted_returns_mean |  -11.2304 |   -6.6958 |
+| episode_discounted_returns_std  |   48.2593 |   49.3452 |
+| episode_discounted_returns_max  |   83.8850 |   83.8850 |
+| episode_discounted_returns_min  |  -87.5900 |  -87.5900 |
+| episode_steps_mean              |   14.2400 |   14.2400 |
+| episode_steps_std               |    6.3579 |    6.3579 |
+| episode_times_mean              |    0.0027 |    0.0027 |
+| episode_times_std               |    0.0012 |    0.0012 |
+| episode_dones                   |    0.5800 |    0.5800 |
+| num_outcome_LOSS                |        15 |        14 |
+| num_outcome_DRAW                |        21 |        21 |
+| num_outcome_WIN                 |        14 |        15 |
+| num_outcome_NA                  |         0 |         0 |
++---------------------------------+-----------+-----------+
+
+
+Result
+``````
+
+R_lo = lowest discounted return achieved by random rollouts
+R_hi = highest discounted return achieved by NST l=0 with uct_c = 0
+
+c = R_hi - R_lo = 89.3 - (-87.6) = 176.9
+
+I'm gonna round to 175 to keep it consistent with Runner uct c.

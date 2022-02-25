@@ -1,0 +1,33 @@
+# This experiment runs I-NTMCP for the comparison with I-POMDP Lite
+env_name: rc
+run_kwargs:
+    seed: 0
+    gamma: 0.95
+    num_episodes: 1000
+    time_limit: 43200     # 12 hours
+    step_limit: 20
+    show_tree: None
+    show_belief: None
+    show_pi: None
+models:
+    cap3:
+        grid_name: cap3
+policies:
+    0:
+        - class: "NST"
+          gamma: 0.95
+          nesting_level: [1]
+          num_sims: [1024]
+          rollout_policies: [None]
+          uct_c: 180.0
+          epsilon: 0.1
+    1:
+        - class: "random"
+          gamma: 0.95
+        - class: "NST"
+          gamma: 0.95
+          nesting_level: [0]
+          num_sims: [1024]
+          rollout_policies: [None]
+          uct_c: 180.0
+          epsilon: 0.1
