@@ -4,7 +4,7 @@ run_kwargs:
     seed: 0
     gamma: 0.95
     num_episodes: 1000
-    time_limit: 43200     # 12 hours
+    time_limit: None
     step_limit: 20
     show_tree: None
     show_belief: None
