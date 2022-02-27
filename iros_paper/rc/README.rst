@@ -13,8 +13,10 @@ Within each directory:
 - ``X.yaml`` files contain experiment parameter definitions (these are the files passed as input to the experiment run script)
 - ``rc_uct_c_exps_evader.txt`` and ``rc_uct_c_exps_pursuer.txt`` contain details and results of experiments for finding the UCT C hyperparameter values used. Note, that the same value for the *7x7* grid is used for both types of experiments.
 
+Each directory also contains jupyter-notebooks for result analysis:
 
-The ``iros_paper/rc/num_sims`` directory also contains the ``plot_rc_pairwise_by_x.ipynb`` jupyter-notebook file for generating plots from the raw results file.
+- ``plot_rc_pairwise_by_x.ipynb`` for generating plots from the raw results file for the num sims experiment.
+- ``rc_comparison.ipynb`` for generating tables from raw results for the I-POMDP Lite comparison experiments.
 
 
 
